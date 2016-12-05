@@ -1,0 +1,6 @@
+{
+  "name": "Plivocallerid",
+  "tagline": "",
+  "body": "from flask import Flask, request, make_response\r\nimport plivo, plivoxml\r\n\r\napp = Flask(__name__)\r\n\r\n@app.route('/dial/', methods=['GET','POST'])\r\ndef dial_id():\r\n    clid = request.values.get('CLID')\r\n    to_number = \"18563359948 \"\r\n    # Set the caller ID using Dial XML\r\n    params = {\r\n        'callerId': clid\r\n    }\r\n\r\n    r = plivoxml.Response()\r\n    d = r.addDial(**params)\r\n    d.addNumber(to_number)\r\n    print r.to_xml()\r\n    return Response(str(r), mimetype='text/xml')\r\n\r\nif __name__ == \"__main__\":\r\n    app.run(host='0.0.0.0', debug=True)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
